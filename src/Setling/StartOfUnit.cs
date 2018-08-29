@@ -1,0 +1,37 @@
+﻿namespace Setling
+{
+    public enum StartOfUnit
+    {
+        Second,
+        Minute,
+        Hour,
+        Day,
+        Month,
+        Quarter,
+        Year,
+        Monday,
+        Tuesday,
+        Wednesday,
+        Thursday,
+        Friday,
+        Saturday,
+        Sunday,
+        January,
+        February,
+        March,
+        April,
+        May,
+        June,
+        July,
+        August,
+        September,
+        October,
+        November,
+        December,
+        Season,
+        Spring,
+        Summer,
+        Autumn,
+        Winter
+    }
+}
