@@ -7,6 +7,7 @@
     <Description>A time settle library for NodaTime</Description>
     <PackageTags>nodatime</PackageTags>
     <RepositoryUrl>https://github.com/rmja/Setling.git</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
