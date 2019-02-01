@@ -24,19 +24,19 @@ namespace Setling
                 case StartOfUnit.Year:
                     return StartOfMonth(1);
                 case StartOfUnit.Monday:
-                    return StartOfWeekday(IsoDayOfWeek.Monday);
+                    return origin.StartOf(IsoDayOfWeek.Monday);
                 case StartOfUnit.Tuesday:
-                    return StartOfWeekday(IsoDayOfWeek.Tuesday);
+                    return origin.StartOf(IsoDayOfWeek.Tuesday);
                 case StartOfUnit.Wednesday:
-                    return StartOfWeekday(IsoDayOfWeek.Wednesday);
+                    return origin.StartOf(IsoDayOfWeek.Wednesday);
                 case StartOfUnit.Thursday:
-                    return StartOfWeekday(IsoDayOfWeek.Thursday);
+                    return origin.StartOf(IsoDayOfWeek.Thursday);
                 case StartOfUnit.Friday:
-                    return StartOfWeekday(IsoDayOfWeek.Friday);
+                    return origin.StartOf(IsoDayOfWeek.Friday);
                 case StartOfUnit.Saturday:
-                    return StartOfWeekday(IsoDayOfWeek.Saturday);
+                    return origin.StartOf(IsoDayOfWeek.Saturday);
                 case StartOfUnit.Sunday:
-                    return StartOfWeekday(IsoDayOfWeek.Sunday);
+                    return origin.StartOf(IsoDayOfWeek.Sunday);
                 case StartOfUnit.January:
                     return StartOfMonth(1);
                 case StartOfUnit.February:
@@ -95,14 +95,6 @@ namespace Setling
                 return origin.Zone.AtLeniently(startOfTicks);
             }
 
-            ZonedDateTime StartOfWeekday(IsoDayOfWeek weekday)
-            {
-                var local = origin.LocalDateTime;
-                var startOfMonday = local.Date.AtMidnight().PlusDays(-(int)local.DayOfWeek);
-                var settled = startOfMonday.PlusDays((int)weekday);
-                return origin.Zone.AtLeniently(settled <= local ? settled : settled.PlusDays(-7));
-            }
-
             ZonedDateTime StartOfMonth(int month)
             {
                 var local = origin.LocalDateTime;
@@ -110,6 +102,14 @@ namespace Setling
                 var settled = startOfYear.PlusMonths(month - 1);
                 return origin.Zone.AtLeniently(settled <= local ? settled : settled.PlusYears(-1));
             }
+        }
+
+        public static ZonedDateTime StartOf(this ZonedDateTime origin, IsoDayOfWeek weekday)
+        {
+            var local = origin.LocalDateTime;
+            var startOfMonday = local.Date.AtMidnight().PlusDays(-(int)local.DayOfWeek);
+            var settled = startOfMonday.PlusDays((int)weekday);
+            return origin.Zone.AtLeniently(settled <= local ? settled : settled.PlusDays(-7));
         }
     }
 }
