@@ -25,7 +25,7 @@ namespace Setling.Internal
             return origin.Zone.AtLeniently(applied);
         }
 
-        public string ToRuleString(bool prefixWithSeparator)
+        public string ToRuleString(bool forcePrefixWithSeparator)
         {
             if (Period == Period.Zero)
             {
@@ -34,9 +34,13 @@ namespace Setling.Internal
 
             var builder = new StringBuilder();
 
-            if (prefixWithSeparator)
+            if (Sign < 0)
             {
-                builder.Append(Sign > 0 ? "+" : "-");
+                builder.Append("-");
+            }
+            else if (forcePrefixWithSeparator)
+            {
+                builder.Append("+");
             }
 
             builder.Append("P");
