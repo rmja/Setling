@@ -43,10 +43,22 @@ namespace Setling
                         builder.StartOf(StartOfUnitEx.Parse(value));
                         break;
                     case "+":
-                        builder.Plus(PeriodEx.Parse(value));
+                        {
+                            var period = PeriodEx.Parse(value);
+                            if (!period.Equals(Period.Zero))
+                            {
+                                builder.Plus(period);
+                            }
+                        }
                         break;
                     case "-":
-                        builder.Minus(PeriodEx.Parse(value));
+                        {
+                            var period = PeriodEx.Parse(value);
+                            if (!period.Equals(Period.Zero))
+                            {
+                                builder.Minus(period);
+                            }
+                        }
                         break;
                 }
             }

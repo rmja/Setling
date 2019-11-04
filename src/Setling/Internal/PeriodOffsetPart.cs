@@ -27,11 +27,6 @@ namespace Setling.Internal
 
         public string ToRuleString(bool forcePrefixWithSeparator)
         {
-            if (Period == Period.Zero)
-            {
-                return string.Empty;
-            }
-
             var builder = new StringBuilder();
 
             if (Sign < 0)

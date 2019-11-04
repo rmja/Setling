@@ -75,6 +75,15 @@ namespace Setling.Tests
         }
 
         [Fact]
+        public void ParseWithZeroPeriodAndDiscard()
+        {
+            var rule = SettleRule.Parse("day-P0D+PT0H");
+
+            Assert.Equal("day", rule.ToString());
+            Assert.Equal(new SettleRuleBuilder().StartOf(StartOfUnit.Day).Rule, rule);
+        }
+
+        [Fact]
         public void SettleNoParts()
         {
             var origin = new LocalDateTime(2014, 11, 12, 21, 0).InZoneLeniently(Timezone);
