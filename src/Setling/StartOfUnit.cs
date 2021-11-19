@@ -32,6 +32,6 @@
         Spring,
         Summer,
         Autumn,
-        Winter
+        Winter,
     }
 }

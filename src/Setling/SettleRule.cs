@@ -1,5 +1,6 @@
 ﻿using NodaTime;
-using Setling.Internal;
+using Setling.Parsers;
+using Setling.Parts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace Setling
 {
     public class SettleRule : IEquatable<SettleRule>
     {
-        private static readonly Regex _firstRegex = new Regex(@"^([_+-])?([a-zA-Z0-9]+)(.*)", RegexOptions.Compiled);
-        private static readonly Regex _remainingRegex = new Regex(@"^([_+-])([a-zA-Z0-9]+)(.*)", RegexOptions.Compiled);
+        private static readonly Regex _firstRegex = new(@"^([_~+-])?([a-zA-Z0-9]+)(.*)", RegexOptions.Compiled);
+        private static readonly Regex _remainingRegex = new(@"^([_~+-])([a-zA-Z0-9]+)(.*)", RegexOptions.Compiled);
 
         internal List<IPart> Parts { get; } = new List<IPart>();
 
@@ -40,11 +41,14 @@ namespace Setling
                 switch (op)
                 {
                     case "_":
-                        builder.StartOf(StartOfUnitEx.Parse(value));
+                        builder.StartOf(StartOfUnitParser.Parse(value));
+                        break;
+                    case "~":
+                        builder.Nearest(StartOfUnitParser.Parse(value));
                         break;
                     case "+":
                         {
-                            var period = PeriodEx.Parse(value);
+                            var period = PeriodParser.Parse(value);
                             if (!period.Equals(Period.Zero))
                             {
                                 builder.Plus(period);
@@ -53,7 +57,7 @@ namespace Setling
                         break;
                     case "-":
                         {
-                            var period = PeriodEx.Parse(value);
+                            var period = PeriodParser.Parse(value);
                             if (!period.Equals(Period.Zero))
                             {
                                 builder.Minus(period);
@@ -77,12 +81,10 @@ namespace Setling
         public override string ToString()
         {
             var builder = new StringBuilder();
-
             foreach (var part in Parts)
             {
                 builder.Append(part.ToRuleString(builder.Length > 0));
             }
-
             return builder.ToString();
         }
 

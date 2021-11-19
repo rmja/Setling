@@ -1,9 +1,8 @@
 ﻿using NodaTime;
 using System;
-using System.Collections.Generic;
 using System.Text;
 
-namespace Setling.Internal
+namespace Setling.Parts
 {
     public class PeriodOffsetPart : IPart, IEquatable<PeriodOffsetPart>
     {
@@ -31,53 +30,53 @@ namespace Setling.Internal
 
             if (Sign < 0)
             {
-                builder.Append("-");
+                builder.Append('-');
             }
             else if (forcePrefixWithSeparator)
             {
-                builder.Append("+");
+                builder.Append('+');
             }
 
-            builder.Append("P");
+            builder.Append('P');
 
             if (Period.Years > 0)
             {
                 builder.Append(Period.Years);
-                builder.Append("Y");
+                builder.Append('Y');
             }
 
             if (Period.Months > 0)
             {
                 builder.Append(Period.Months);
-                builder.Append("M");
+                builder.Append('M');
             }
 
             if (Period.Days > 0)
             {
                 builder.Append(Period.Days);
-                builder.Append("D");
+                builder.Append('D');
             }
 
             if (Period.Hours + Period.Minutes + Period.Seconds > 0)
             {
-                builder.Append("T");
+                builder.Append('T');
 
                 if (Period.Hours > 0)
                 {
                     builder.Append(Period.Hours);
-                    builder.Append("H");
+                    builder.Append('H');
                 }
 
                 if (Period.Minutes > 0)
                 {
                     builder.Append(Period.Minutes);
-                    builder.Append("M");
+                    builder.Append('M');
                 }
 
                 if (Period.Seconds > 0)
                 {
                     builder.Append(Period.Seconds);
-                    builder.Append("S");
+                    builder.Append('S');
                 }
             }
 
@@ -86,7 +85,7 @@ namespace Setling.Internal
 
         public bool Equals(PeriodOffsetPart other) =>
             Sign == other.Sign &&
-            EqualityComparer<Period>.Default.Equals(Period, other.Period);
+            Period.Equals(other.Period);
 
         public override bool Equals(object obj) => obj is PeriodOffsetPart other && Equals(other);
 

@@ -35,6 +35,14 @@ namespace Setling.Tests
         }
 
         [Fact]
+        public void ParseNearest()
+        {
+            var rule = SettleRule.Parse("~day");
+
+            Assert.Equal(new SettleRuleBuilder().Nearest(StartOfUnit.Day).Rule, rule);
+        }
+
+        [Fact]
         public void ParsePeriod()
         {
             var rule = SettleRule.Parse("P1D");

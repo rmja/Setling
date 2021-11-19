@@ -14,7 +14,7 @@ namespace Setling
             IsoDayOfWeek.Friday => StartOfUnit.Friday,
             IsoDayOfWeek.Saturday => StartOfUnit.Saturday,
             IsoDayOfWeek.Sunday => StartOfUnit.Sunday,
-            _ => throw new ArgumentException()
+            _ => throw new ArgumentException("Invalid day of week", nameof(dayOfWeek)),
         };
     }
 }

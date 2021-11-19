@@ -1,15 +1,15 @@
 ﻿using NodaTime;
-using Setling.Internal;
+using Setling.Parsers;
 using Xunit;
 
-namespace Setling.Tests
+namespace Setling.Tests.Parsers
 {
-    public class PeriodExTests
+    public class PeriodParserTests
     {
         [Fact]
         public void CanParseEmpty()
         {
-            var period = PeriodEx.Parse(string.Empty);
+            var period = PeriodParser.Parse(string.Empty);
 
             Assert.Equal(Period.Zero, period);
         }
@@ -17,7 +17,7 @@ namespace Setling.Tests
         [Fact]
         public void CanParseWithoutTime()
         {
-            var period = PeriodEx.Parse("P1Y2M3D");
+            var period = PeriodParser.Parse("P1Y2M3D");
 
             Assert.Equal(1, period.Years);
             Assert.Equal(2, period.Months);
@@ -30,7 +30,7 @@ namespace Setling.Tests
         [Fact]
         public void CanParseWithTime()
         {
-            var period = PeriodEx.Parse("P1Y2M3DT4H5M6S");
+            var period = PeriodParser.Parse("P1Y2M3DT4H5M6S");
 
             Assert.Equal(1, period.Years);
             Assert.Equal(2, period.Months);

@@ -1,7 +1,7 @@
 ﻿using NodaTime;
 using System;
 
-namespace Setling.Internal
+namespace Setling.Parts
 {
     public class StartOfPart : IPart, IEquatable<StartOfPart>
     {

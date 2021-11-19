@@ -1,7 +1,7 @@
 ﻿using NodaTime;
 using Xunit;
 
-namespace Setling.Tests
+namespace Setling.Tests.Extensions
 {
     public class ZonedDateTimeExtensions_StartOfTests
     {

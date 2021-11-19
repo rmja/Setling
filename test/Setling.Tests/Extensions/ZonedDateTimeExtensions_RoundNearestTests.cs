@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using Xunit;
 
-namespace Setling.Tests
+namespace Setling.Tests.Extensions
 {
     public class ZonedDateTimeExtensions_RoundNearestTests
     {
         private static readonly DateTimeZone Timezone = DateTimeZoneProviders.Tzdb.GetZoneOrNull("Europe/Copenhagen");
-
 
         [Theory]
         [MemberData(nameof(GetData))]

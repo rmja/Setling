@@ -2,9 +2,9 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace Setling.Internal
+namespace Setling.Parsers
 {
-    public class PeriodEx
+    public static class PeriodParser
     {
         private static class Groups
         {
@@ -16,7 +16,7 @@ namespace Setling.Internal
             public const string Seconds = nameof(Seconds);
         }
 
-        private static readonly Regex _regex = new Regex($@"^P
+        private static readonly Regex _regex = new($@"^P
 ((?<{Groups.Years}>\d+)Y)?
 ((?<{Groups.Months}>\d+)M)?
 ((?<{Groups.Days}>\d+)D)?
@@ -34,9 +34,7 @@ namespace Setling.Internal
             }
 
             var builder = new PeriodBuilder();
-
             var match = _regex.Match(input);
-
             if (match.Success)
             {
                 builder.Years += int.Parse(match.Groups[Groups.Years].Value.NullIfEmpty() ?? "0");
@@ -48,7 +46,7 @@ namespace Setling.Internal
             }
             else
             {
-                throw new ArgumentException();
+                throw new ArgumentException("Input is not a valid period", nameof(input));
             }
 
             return builder.Build();

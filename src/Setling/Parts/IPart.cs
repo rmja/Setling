@@ -1,6 +1,6 @@
 ﻿using NodaTime;
 
-namespace Setling.Internal
+namespace Setling.Parts
 {
     internal interface IPart
     {
