@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Setling.Parts
 {
-    public class PeriodOffsetPart : IPart, IEquatable<PeriodOffsetPart>
+    internal class PeriodPart : IPart, IEquatable<PeriodPart>
     {
         public int Sign { get; }
         public Period Period { get; }
 
-        public PeriodOffsetPart(int sign, Period duration)
+        public PeriodPart(int sign, Period duration)
         {
             Sign = sign;
             Period = duration;
@@ -83,11 +83,11 @@ namespace Setling.Parts
             return builder.ToString();
         }
 
-        public bool Equals(PeriodOffsetPart other) =>
+        public bool Equals(PeriodPart other) =>
             Sign == other.Sign &&
             Period.Equals(other.Period);
 
-        public override bool Equals(object obj) => obj is PeriodOffsetPart other && Equals(other);
+        public override bool Equals(object obj) => obj is PeriodPart other && Equals(other);
 
         public override int GetHashCode() => (Sign, Period).GetHashCode();
     }

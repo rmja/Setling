@@ -27,13 +27,13 @@ namespace Setling
 
         public SettleRuleBuilder Plus(Period period)
         {
-            Rule.Parts.Add(new PeriodOffsetPart(1, period));
+            Rule.Parts.Add(new PeriodPart(1, period));
             return this;
         }
 
         public SettleRuleBuilder Minus(Period period)
         {
-            Rule.Parts.Add(new PeriodOffsetPart(-1, period));
+            Rule.Parts.Add(new PeriodPart(-1, period));
             return this;
         }
     }

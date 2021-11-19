@@ -3,7 +3,7 @@ using System;
 
 namespace Setling.Parts
 {
-    public class NearestPart : IPart, IEquatable<NearestPart>
+    internal class NearestPart : IPart, IEquatable<NearestPart>
     {
         public SettleUnit Unit { get; }
 
