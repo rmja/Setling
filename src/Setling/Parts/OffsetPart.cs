@@ -4,15 +4,15 @@ using System.Text;
 
 namespace Setling.Parts
 {
-    internal class PeriodPart : IPart, IEquatable<PeriodPart>
+    internal class OffsetPart : IPart, IEquatable<OffsetPart>
     {
         public int Sign { get; }
         public Period Period { get; }
 
-        public PeriodPart(int sign, Period duration)
+        public OffsetPart(int sign, Period period)
         {
             Sign = sign;
-            Period = duration;
+            Period = period;
         }
 
         public ZonedDateTime Apply(ZonedDateTime origin)
@@ -83,11 +83,11 @@ namespace Setling.Parts
             return builder.ToString();
         }
 
-        public bool Equals(PeriodPart other) =>
+        public bool Equals(OffsetPart other) =>
             Sign == other.Sign &&
             Period.Equals(other.Period);
 
-        public override bool Equals(object obj) => obj is PeriodPart other && Equals(other);
+        public override bool Equals(object obj) => obj is OffsetPart other && Equals(other);
 
         public override int GetHashCode() => (Sign, Period).GetHashCode();
     }

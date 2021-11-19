@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <Authors>Rasmus Melchior Jacobsen</Authors>
     <Description>A time settle library for NodaTime</Description>
     <PackageTags>nodatime</PackageTags>
