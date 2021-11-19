@@ -11,8 +11,8 @@ namespace Setling
 {
     public class SettleRule : IEquatable<SettleRule>
     {
-        private static readonly Regex _firstRegex = new(@"^([_~+-])?([a-zA-Z0-9]+)(.*)", RegexOptions.Compiled);
-        private static readonly Regex _remainingRegex = new(@"^([_~+-])([a-zA-Z0-9]+)(.*)", RegexOptions.Compiled);
+        private static readonly Regex _firstRegex = new(@"^([_~^+-])?([a-zA-Z0-9]+)(.*)", RegexOptions.Compiled);
+        private static readonly Regex _remainingRegex = new(@"^([_~^+-])([a-zA-Z0-9]+)(.*)", RegexOptions.Compiled);
 
         internal List<IPart> Parts { get; } = new List<IPart>();
 
@@ -41,10 +41,13 @@ namespace Setling
                 switch (op)
                 {
                     case "_":
-                        builder.StartOf(StartOfUnitParser.Parse(value));
+                        builder.StartOf(SettleUnitParser.Parse(value));
                         break;
                     case "~":
-                        builder.Nearest(StartOfUnitParser.Parse(value));
+                        builder.Nearest(SettleUnitParser.Parse(value));
+                        break;
+                    case "^":
+                        builder.EndOf(SettleUnitParser.Parse(value));
                         break;
                     case "+":
                         {

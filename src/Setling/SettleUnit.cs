@@ -1,6 +1,6 @@
 ﻿namespace Setling
 {
-    public enum StartOfUnit
+    public enum SettleUnit
     {
         Second,
         Minute,

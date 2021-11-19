@@ -5,21 +5,16 @@ namespace Setling.Parts
 {
     public class StartOfPart : IPart, IEquatable<StartOfPart>
     {
-        public StartOfUnit Unit { get; }
+        public SettleUnit Unit { get; }
 
-        public StartOfPart(StartOfUnit unit)
+        public StartOfPart(SettleUnit unit)
         {
             Unit = unit;
         }
 
         public ZonedDateTime Apply(ZonedDateTime origin) => origin.StartOf(Unit);
 
-        public string ToRuleString(bool forcePrefixWithSeparator)
-        {
-            var unit = Unit.ToString();
-
-            return (forcePrefixWithSeparator ? "_" : string.Empty) + char.ToLowerInvariant(unit[0]) + unit.Substring(1);
-        }
+        public string ToRuleString(bool forcePrefixWithSeparator) => (forcePrefixWithSeparator ? "_" : string.Empty) + Unit.ToCamelCaseString();
 
         public bool Equals(StartOfPart other) => Unit == other.Unit;
 

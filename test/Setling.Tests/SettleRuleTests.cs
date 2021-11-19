@@ -23,7 +23,7 @@ namespace Setling.Tests
         {
             var rule = SettleRule.Parse("day");
 
-            Assert.Equal(new SettleRuleBuilder().StartOf(StartOfUnit.Day).Rule, rule);
+            Assert.Equal(new SettleRuleBuilder().StartOf(SettleUnit.Day).Rule, rule);
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace Setling.Tests
         {
             var rule = SettleRule.Parse("_day");
 
-            Assert.Equal(new SettleRuleBuilder().StartOf(StartOfUnit.Day).Rule, rule);
+            Assert.Equal(new SettleRuleBuilder().StartOf(SettleUnit.Day).Rule, rule);
         }
 
         [Fact]
@@ -39,7 +39,15 @@ namespace Setling.Tests
         {
             var rule = SettleRule.Parse("~day");
 
-            Assert.Equal(new SettleRuleBuilder().Nearest(StartOfUnit.Day).Rule, rule);
+            Assert.Equal(new SettleRuleBuilder().Nearest(SettleUnit.Day).Rule, rule);
+        }
+
+        [Fact]
+        public void ParseEndOf()
+        {
+            var rule = SettleRule.Parse("^day");
+
+            Assert.Equal(new SettleRuleBuilder().EndOf(SettleUnit.Day).Rule, rule);
         }
 
         [Fact]
@@ -71,7 +79,7 @@ namespace Setling.Tests
         {
             var rule = SettleRule.Parse("day+P1D");
 
-            Assert.Equal(new SettleRuleBuilder().StartOf(StartOfUnit.Day).Plus(Period.FromDays(1)).Rule, rule);
+            Assert.Equal(new SettleRuleBuilder().StartOf(SettleUnit.Day).Plus(Period.FromDays(1)).Rule, rule);
         }
 
         [Fact]
@@ -79,7 +87,7 @@ namespace Setling.Tests
         {
             var rule = SettleRule.Parse("day+P1D-PT2H");
 
-            Assert.Equal(new SettleRuleBuilder().StartOf(StartOfUnit.Day).Plus(Period.FromDays(1)).Minus(Period.FromHours(2)).Rule, rule);
+            Assert.Equal(new SettleRuleBuilder().StartOf(SettleUnit.Day).Plus(Period.FromDays(1)).Minus(Period.FromHours(2)).Rule, rule);
         }
 
         [Fact]
@@ -88,7 +96,7 @@ namespace Setling.Tests
             var rule = SettleRule.Parse("day-P0D+PT0H");
 
             Assert.Equal("day", rule.ToString());
-            Assert.Equal(new SettleRuleBuilder().StartOf(StartOfUnit.Day).Rule, rule);
+            Assert.Equal(new SettleRuleBuilder().StartOf(SettleUnit.Day).Rule, rule);
         }
 
         [Fact]

@@ -11,20 +11,20 @@ namespace Setling.Tests.Extensions
         public void StartOfDay()
         {
             var origin = new LocalDateTime(2014, 11, 12, 21, 0).InZoneLeniently(Timezone);
-            var result = origin.StartOf(StartOfUnit.Day);
+            var result = origin.StartOf(SettleUnit.Day);
 
             Assert.Equal(new LocalDateTime(2014, 11, 12, 0, 0).InZoneLeniently(Timezone), result);
         }
 
         [Theory]
-        [InlineData(StartOfUnit.Monday, 10)]
-        [InlineData(StartOfUnit.Tuesday, 11)]
-        [InlineData(StartOfUnit.Wednesday, 12)]
-        [InlineData(StartOfUnit.Thursday, 6)]
-        [InlineData(StartOfUnit.Friday, 7)]
-        [InlineData(StartOfUnit.Saturday, 8)]
-        [InlineData(StartOfUnit.Sunday, 9)]
-        public void StartOfWeekday(StartOfUnit weekday, int expectedDay)
+        [InlineData(SettleUnit.Monday, 10)]
+        [InlineData(SettleUnit.Tuesday, 11)]
+        [InlineData(SettleUnit.Wednesday, 12)]
+        [InlineData(SettleUnit.Thursday, 6)]
+        [InlineData(SettleUnit.Friday, 7)]
+        [InlineData(SettleUnit.Saturday, 8)]
+        [InlineData(SettleUnit.Sunday, 9)]
+        public void StartOfWeekday(SettleUnit weekday, int expectedDay)
         {
             var origin = new LocalDateTime(2014, 11, 12, 21, 0).InZoneLeniently(Timezone); // Wednesday
             var result = origin.StartOf(weekday);
@@ -33,19 +33,19 @@ namespace Setling.Tests.Extensions
         }
 
         [Theory]
-        [InlineData(StartOfUnit.January, 2014, 1)]
-        [InlineData(StartOfUnit.February, 2014, 2)]
-        [InlineData(StartOfUnit.March, 2014, 3)]
-        [InlineData(StartOfUnit.April, 2014, 4)]
-        [InlineData(StartOfUnit.May, 2014, 5)]
-        [InlineData(StartOfUnit.June, 2014, 6)]
-        [InlineData(StartOfUnit.July, 2014, 7)]
-        [InlineData(StartOfUnit.August, 2014, 8)]
-        [InlineData(StartOfUnit.September, 2014, 9)]
-        [InlineData(StartOfUnit.October, 2014, 10)]
-        [InlineData(StartOfUnit.November, 2014, 11)]
-        [InlineData(StartOfUnit.December, 2013, 12)]
-        public void StartOfMonth(StartOfUnit month, int expectedYear, int expectedMonth)
+        [InlineData(SettleUnit.January, 2014, 1)]
+        [InlineData(SettleUnit.February, 2014, 2)]
+        [InlineData(SettleUnit.March, 2014, 3)]
+        [InlineData(SettleUnit.April, 2014, 4)]
+        [InlineData(SettleUnit.May, 2014, 5)]
+        [InlineData(SettleUnit.June, 2014, 6)]
+        [InlineData(SettleUnit.July, 2014, 7)]
+        [InlineData(SettleUnit.August, 2014, 8)]
+        [InlineData(SettleUnit.September, 2014, 9)]
+        [InlineData(SettleUnit.October, 2014, 10)]
+        [InlineData(SettleUnit.November, 2014, 11)]
+        [InlineData(SettleUnit.December, 2013, 12)]
+        public void StartOfMonth(SettleUnit month, int expectedYear, int expectedMonth)
         {
             var origin = new LocalDateTime(2014, 11, 12, 21, 0).InZoneLeniently(Timezone);
             var result = origin.StartOf(month);
@@ -69,7 +69,7 @@ namespace Setling.Tests.Extensions
         public void StartOfSeason(int month, int expectedYear, int expectedMonth)
         {
             var origin = new LocalDateTime(2014, month, 12, 21, 0).InZoneLeniently(Timezone);
-            var result = origin.StartOf(StartOfUnit.Season);
+            var result = origin.StartOf(SettleUnit.Season);
 
             Assert.Equal(new LocalDateTime(expectedYear, expectedMonth, 1, 0, 0).InZoneLeniently(Timezone), result);
         }

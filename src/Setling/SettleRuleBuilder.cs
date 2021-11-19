@@ -7,15 +7,21 @@ namespace Setling
     {
         public SettleRule Rule { get; } = new SettleRule();
 
-        public SettleRuleBuilder StartOf(StartOfUnit unit)
+        public SettleRuleBuilder StartOf(SettleUnit unit)
         {
             Rule.Parts.Add(new StartOfPart(unit));
             return this;
         }
 
-        public SettleRuleBuilder Nearest(StartOfUnit unit)
+        public SettleRuleBuilder Nearest(SettleUnit unit)
         {
             Rule.Parts.Add(new NearestPart(unit));
+            return this;
+        }
+
+        public SettleRuleBuilder EndOf(SettleUnit unit)
+        {
+            Rule.Parts.Add(new EndOfPart(unit));
             return this;
         }
 

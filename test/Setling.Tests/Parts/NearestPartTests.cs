@@ -19,7 +19,7 @@ namespace Setling.Tests.Parts
             var expected = new LocalDateTime(2021, 11, 19, 00, 00, 00).InZoneLeniently(DateTimeZoneProviders.Tzdb["Europe/Copenhagen"]);
 
             // When
-            var rounded = new NearestPart(StartOfUnit.Day).Apply(origin);
+            var rounded = new NearestPart(SettleUnit.Day).Apply(origin);
 
             // Then
             Assert.Equal(expected, rounded);
@@ -33,7 +33,7 @@ namespace Setling.Tests.Parts
             var expected = new LocalDateTime(2021, 11, 20, 00, 00, 00).InZoneLeniently(DateTimeZoneProviders.Tzdb["Europe/Copenhagen"]);
 
             // When
-            var rounded = new NearestPart(StartOfUnit.Day).Apply(origin);
+            var rounded = new NearestPart(SettleUnit.Day).Apply(origin);
 
             // Then
             Assert.Equal(expected, rounded);

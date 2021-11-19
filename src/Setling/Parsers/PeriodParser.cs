@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace Setling.Parsers
 {
-    public static class PeriodParser
+    internal static class PeriodParser
     {
         private static class Groups
         {

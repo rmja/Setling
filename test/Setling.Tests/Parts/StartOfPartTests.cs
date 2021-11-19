@@ -14,7 +14,7 @@ namespace Setling.Tests.Parts
             var expected = new LocalDateTime(2021, 11, 19, 00, 00, 00).InZoneLeniently(DateTimeZoneProviders.Tzdb["Europe/Copenhagen"]);
 
             // When
-            var rounded = new StartOfPart(StartOfUnit.Day).Apply(origin);
+            var rounded = new StartOfPart(SettleUnit.Day).Apply(origin);
 
             // Then
             Assert.Equal(expected, rounded);
