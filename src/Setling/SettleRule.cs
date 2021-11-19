@@ -3,6 +3,7 @@ using NodaTime.Extensions;
 using Setling.Parsers;
 using Setling.Parts;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace Setling
 {
-    public class SettleRule : IEquatable<SettleRule>
+    public class SettleRule : IEquatable<SettleRule>, IEnumerable<IPart>
     {
         private static readonly Regex _firstRegex = new(@"^([_~^+-])?([a-zA-Z0-9]+)(.*)", RegexOptions.Compiled);
         private static readonly Regex _remainingRegex = new(@"^([_~^+-])([a-zA-Z0-9]+)(.*)", RegexOptions.Compiled);
@@ -97,5 +98,9 @@ namespace Setling
         public override bool Equals(object obj) => obj is SettleRule other && Equals(other);
 
         public override int GetHashCode() => Parts.Count;
+
+        public IEnumerator<IPart> GetEnumerator() => Parts.GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

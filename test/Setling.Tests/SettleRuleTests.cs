@@ -1,6 +1,8 @@
 ﻿using NodaTime;
+using Setling.Parts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
 
@@ -129,6 +131,23 @@ namespace Setling.Tests
             var settled = SettleRule.Parse("-P15D_month+P1M-P1D").Settle(origin);
 
             Assert.Equal(new LocalDateTime(2014, expectedMonth, expectedDay, 0, 0).InZoneLeniently(Timezone), settled);
+        }
+
+        [Fact]
+        public void EnumeratingRuleShouldEmitParts()
+        {
+            // Given
+            var rule = SettleRule.Parse("day+PT2H~january-P1Y");
+
+            // When
+            var parts = rule.ToList();
+
+            // Then
+            Assert.Equal(4, parts.Count);
+            Assert.Equal(new StartOfPart(SettleUnit.Day), Assert.IsType<StartOfPart>(parts[0]));
+            Assert.Equal(new OffsetPart(1, Period.FromHours(2)), Assert.IsType<OffsetPart>(parts[1]));
+            Assert.Equal(new NearestPart(SettleUnit.January), Assert.IsType<NearestPart>(parts[2]));
+            Assert.Equal(new OffsetPart(-1, Period.FromYears(1)), Assert.IsType<OffsetPart>(parts[3]));
         }
     }
 }

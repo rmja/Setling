@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Setling.Parts
 {
-    internal class OffsetPart : IPart, IEquatable<OffsetPart>
+    public class OffsetPart : IPart, IEquatable<OffsetPart>
     {
         public int Sign { get; }
         public Period Period { get; }

@@ -3,7 +3,7 @@ using System;
 
 namespace Setling.Parts
 {
-    internal class StartOfPart : IPart, IEquatable<StartOfPart>
+    public class StartOfPart : IPart, IEquatable<StartOfPart>
     {
         public SettleUnit Unit { get; }
 
