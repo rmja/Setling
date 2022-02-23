@@ -1,5 +1,6 @@
 ﻿using NodaTime;
 using System;
+using System.Runtime.CompilerServices;
 
 namespace Setling
 {
@@ -43,12 +44,14 @@ namespace Setling
                 _ => throw new ArgumentException("Invalid start of unit", nameof(unit)),
             };
 
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             LocalDateTime StartOfTicks(long ticks)
             {
                 var local = origin;
                 return local.PlusTicks(-(local.TickOfDay % ticks));
             }
 
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             LocalDateTime StartOfMonth(int month)
             {
                 var local = origin;
@@ -57,6 +60,7 @@ namespace Setling
                 return settled <= local ? settled : settled.PlusYears(-1);
             }
 
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             LocalDateTime StartOfSeason()
             {
                 // 1 -> 12
